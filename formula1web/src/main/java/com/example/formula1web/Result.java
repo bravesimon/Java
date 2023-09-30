@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 @Table(name = "eredmeny")
 public class Result {
     @Column(name="datum")
-    private int  date;
+    private String  date;
 
     @Id
     @Column(name="pilotaaz")
@@ -30,11 +30,11 @@ public class Result {
     @Column(name="motor")
     private String motor;
 
-    public int getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

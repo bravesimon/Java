@@ -19,7 +19,7 @@ public class PilotModel {
     private String sex;
 
     @Column(name="szuldat")
-    private String szuldat;
+    private String birthDate;
 
     @Column(name="nemzet")
     private String nation;
@@ -48,12 +48,12 @@ public class PilotModel {
         this.sex = sex;
     }
 
-    public String getSzuldat() {
-        return szuldat;
+    public String getBirthDate() {
+        return birthDate;
     }
 
-    public void setSzuldat(String szuldat) {
-        this.szuldat = szuldat;
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getNation() {

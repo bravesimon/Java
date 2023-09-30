@@ -8,13 +8,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Comparator;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 public class HomeController {
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd h:m");
 
     @Autowired private FormModelRepo formModelRepo;
 
@@ -96,8 +100,9 @@ public class HomeController {
 
     @PostMapping("/uzenet_feldolgoz")
     public String UzenetFeldolgoz(@ModelAttribute FormModel form, Model model) {
+
         try {
-            String timeStamp = new SimpleDateFormat("yyyy.MM.dd").format(Calendar.getInstance().getTime());
+            String timeStamp = dateFormat.format(Calendar.getInstance().getTime());
             form.setSent(timeStamp);
             formModelRepo.save(form);
             model.addAttribute("msg", "Uzenet elkuldve!");
@@ -123,7 +128,7 @@ public class HomeController {
         String htmlString = "";
 
         for (PilotModel pilotModel : pilotModelRepo.findAll()) {
-            htmlString += pilotModel.getIdentifier() + "; " + pilotModel.getName() + "; " + pilotModel.getSex() + ";" + pilotModel.getSzuldat() + "; " + pilotModel.getNation();
+            htmlString += pilotModel.getIdentifier() + "; " + pilotModel.getName() + "; " + pilotModel.getSex() + ";" + pilotModel.getBirthDate() + "; " + pilotModel.getNation();
             htmlString += "<br>";
         }
 
@@ -141,15 +146,23 @@ public class HomeController {
         return htmlString;
     }
 
-    String GetMessages(){
+    String GetMessages() {
         if (formModelRepo.findAll().isEmpty()) {
             return new String();
         }
 
-        formModelRepo.findAll().sort( Comparator.comparing(FormModel::getSent).reversed() );
+        List<FormModel> sortedList = formModelRepo.findAll();
+        Collections.sort(sortedList, (a, b) -> {
+            try {
+                return dateFormat.parse(a.getSent()).before(dateFormat.parse(b.getSent())) ? 1 : -1;
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         String htmlString="<table><tr><th>Nev</th><th>Ido</th><th>Uzenet</th></tr>";
 
-        for (FormModel form : formModelRepo.findAll()) {
+        for (FormModel form : sortedList) {
             htmlString+="<tr> <td>" + form.getName() + "</td>";
             htmlString+="<td>" + form.getSent() + "</td>";
             htmlString+="<td>" + form.getMessage() + "</td> </tr>";

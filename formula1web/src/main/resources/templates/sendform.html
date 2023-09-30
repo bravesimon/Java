@@ -11,8 +11,8 @@
 <form action="#" th:action="@{/uzenet_feldolgoz}" th:object="${form}" method="post">
   <fieldset>
     <legend>Uzenet</legend>
-    <p><input type="text" th:field="*{name}" placeholder="Név" required/></p>
-    <p><input type="text" th:field="*{message}" placeholder="uzenet" required/></p>
+    <p><input type="text" th:field="*{name}" placeholder="Név" required minlength="5" name="95"/></p>
+    <p><input type="text" th:field="*{message}" placeholder="uzenet" required minlength="5" maxlength="450"/></p>
     <p><input type="submit" value="Kuldes" /></p>
   </fieldset>
 </form>
