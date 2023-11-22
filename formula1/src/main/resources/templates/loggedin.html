@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+
+    <style>
+      body {
+        background-image: url('/car.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+      }
+    </style>
+
+</head>
+<body>
+
+<h1> <p th:text="'Udv az oldalon: ' + ${loginModelAttr.email}" /> </h1>
+<a href="/">Kilepes</a>
+
+</body>
+</html>
