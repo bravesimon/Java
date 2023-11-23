@@ -1,5 +1,6 @@
 package com.example.formula1;
 
+import com.example.formula1.db.DbController;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ public class MainPageController {
 
     MainPageController() {
         logins = new ArrayList<>();
+        logins.add(new LoginModel("admin", "123456"));
     }
 
     @GetMapping("/")
@@ -53,6 +55,8 @@ public class MainPageController {
         }
 
         model.addAttribute("loginModelAttr", loginModel);
+        //model.addAttribute("gps", DbController);
+
         return "loggedin";
     }
 
