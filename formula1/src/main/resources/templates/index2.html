@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formula 1</title>
+    <style>
+        body {
+            background-image: url('/car.jpg'); <!-- relative to static folder -->
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
+
+</head>
+<body>
+
+    <h1>Udv az oldalon!</h1>
+    <h3>Valoszinuleg mar mindenki hallott a formula 1-rol.</h3>
+    <h3>A vallalkozasunk celja meg jobban bemutatni a lenyugozo teljesitmenyt a sport mogott.</h3>
+    <h3>Megtekintheti a statisztikakat belepes utan.</h3>
+
+    <form action="#" th:action="@{/login}" method="get">
+        <input type="submit" value="Belepes" />
+        </p>
+    </form>
+
+    <br>
+
+    <h3>Ha meg nincs fiokja ide kattintva regisztraljon: </h3>
+    <form action="#" th:action="@{/register}" method="get">
+        <input type="submit" value="Regisztracio" />
+        </p>
+    </form>
+
+</body>
+</html>

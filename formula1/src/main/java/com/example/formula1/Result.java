@@ -1,17 +1,14 @@
-package com.example.formula1.db;
+package com.example.formula1;
 
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "eredmeny")
 public class Result {
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
-
     @Column(name="datum")
     private int  date;
 
+    @Id
     @Column(name="pilotaaz")
     private int pilotId;
 
@@ -29,15 +26,6 @@ public class Result {
 
     @Column(name="motor")
     private String motor;
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getDate() {
         return date;

@@ -1,4 +1,4 @@
-package com.example.formula1.db;
+package com.example.formula1;
 
 import org.springframework.data.repository.CrudRepository;
 

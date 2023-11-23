@@ -1,13 +1,11 @@
-package com.example.formula1.db;
+package com.example.formula1;
 
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "pilota")
 public class PilotModel {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
-
     @Column(name="az")
     private int identifier;
 
@@ -22,14 +20,6 @@ public class PilotModel {
 
     @Column(name="nemzet")
     private String nation;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getIdentifier() {
         return identifier;

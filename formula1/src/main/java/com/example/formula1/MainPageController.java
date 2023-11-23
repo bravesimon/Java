@@ -1,6 +1,5 @@
 package com.example.formula1;
 
-import com.example.formula1.db.DbController;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,10 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("fo")
 public class MainPageController {
     private static final int  kMinChar = 4;
 
@@ -24,7 +26,7 @@ public class MainPageController {
 
     @GetMapping("/")
     public String MainPage(Model model) {
-        return "index";
+        return "index2";
     }
 
     @GetMapping("/loggedin")
@@ -41,7 +43,7 @@ public class MainPageController {
     @PostMapping("/loggedin")
     public String Loggedin(@Valid @ModelAttribute LoginModel loginModel, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "index";
+            return "index2";
         }
 
         if (loginModel == null || loginModel.getEmail().length() < kMinChar || loginModel.getPassword().length() < kMinChar ) {
@@ -69,7 +71,7 @@ public class MainPageController {
     @PostMapping("/registered")
     public String Registered(@Valid @ModelAttribute LoginModel loginModel, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "index";
+            return "index2";
         }
 
         if (loginModel == null || loginModel.getEmail().length() < kMinChar || loginModel.getPassword().length() < kMinChar ) {
