@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>User Home</title>
+  <title>Formula 1</title>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+
+  <style>
+    body {
+      background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F8400.info.hu%2Fwp-content%2Fuploads%2F2021%2F04%2FGRT_2B0A9097-850x491.jpg&f=1&nofb=1&ipt=7200fff895be58aa7ed34d63ce96154b185dc6910a74e6b48778b6026783ea87&ipo=images');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+  </style>
+
+</head>
+<body>
+<div th:insert="menu"></div>
+<h1>Megtekintheti az elerheto adatbazisokat.</h1>
+
+<form action="#" th:action="@{/home/gp}" method="get">
+  <input type="submit" value="Futamok listazasa" />
+  </p>
+</form>
+
+<form action="#" th:action="@{/home/result}" method="get">
+  <input type="submit" value="Eredmenyek listazasa" />
+  </p>
+</form>
+
+<form action="#" th:action="@{/home/pilot}" method="get">
+  <input type="submit" value="Pilotak listazasa" />
+  </p>
+</form>
+
+<p th:utext="${foundDB}"></p>
+
+</body>
+</html>
