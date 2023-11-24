@@ -51,11 +51,12 @@ DROP TABLE IF EXISTS `form`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `form` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `message` varchar(500) NOT NULL,
-  `sendTime` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `sent` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,6 +65,7 @@ CREATE TABLE `form` (
 
 LOCK TABLES `form` WRITE;
 /*!40000 ALTER TABLE `form` DISABLE KEYS */;
+INSERT INTO `form` VALUES (1,'Bela2','Tetszik','2023.11.24 12:46'),(2,'Jozsef','nagyon joo','2023.11.24 12:48'),(3,'Jozsef3','valami valami','2023.11.23 11:00'),(4,'Jozsef5','valami valami','2023.11.24 16:00'),(5,'Pistike','nem tudom','2023.11.24 1:33'),(6,'Jozsef','nagyon jo','2023.11.24 1:35');
 /*!40000 ALTER TABLE `form` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,12 +208,13 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` varchar(30) NOT NULL DEFAULT 'ROLE_USER'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `role` varchar(30) NOT NULL DEFAULT 'ROLE_USER',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -220,6 +223,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'admin','admin.hu','$2a$10$h1ym3oeSAkrmPhsd2Y.0XOihKZCto9915nyOqp3V8IuhO8zfkltfm','ROLE_ADMIN'),(2,'bela','bela.hu','$2a$10$pxjKnD/LBx3s9jpLvTifVe0qmlNanvjVKNy3oM6gm6UqDjOm7mR8i','ROLE_Vendeg'),(3,'admin2','admin2.hu','$2a$10$xOXHh8ygoTFdXKTvYXVoHuWiZDXSnI.nqptKYocWQDfzRkdiGUZty','ROLE_ADMIN'),(4,'patrik','patrik@p.hu','$2a$10$UV/vowFMlklMoYAwPyLLkO42sg4P8EqNjaYcLX1qT4Ad9PbeGuNEq','ROLE_Vendeg'),(5,'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','alma','$2a$10$khCZrlrpxd.zkh.aG2un3Ow42XbOHAJ2pCJkHU1yTqXWa4qDVhr56','ROLE_Vendeg');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -232,4 +236,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-23 14:22:08
+-- Dump completed on 2023-11-24 16:06:55
