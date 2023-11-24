@@ -30,6 +30,7 @@ public class WebSecurityConfig {
                         auth -> auth.requestMatchers("/resources/**", "/").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/resources/**", "/", "/regisztral", "/regisztral_feldolgoz").permitAll()
+                                .requestMatchers("/resources/**", "/", "/sendForm", "/uzenet_feldolgoz").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin

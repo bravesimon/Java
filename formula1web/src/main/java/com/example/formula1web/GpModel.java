@@ -5,11 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import javax.xml.crypto.Data;
+import java.sql.Date;
+
 @Entity
 @Table(name = "gp")
 public class GpModel {
     @Column(name="datum")
-    private int  date;
+    private String date;
 
     @Id
     @Column(name="nev")
@@ -18,11 +21,11 @@ public class GpModel {
     @Column(name="helyszin")
     private String place;
 
-    public int getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

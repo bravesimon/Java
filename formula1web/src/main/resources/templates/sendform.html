@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <title>Kuldjon uzenetet</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<h3>Kuldjon nekunk uzenetet.</h3>
+
+<form action="#" th:action="@{/uzenet_feldolgoz}" th:object="${form}" method="post">
+  <fieldset>
+    <legend>Uzenet</legend>
+    <p><input type="text" th:field="*{name}" placeholder="Név" required/></p>
+    <p><input type="text" th:field="*{message}" placeholder="uzenet" required/></p>
+    <p><input type="submit" value="Kuldes" /></p>
+  </fieldset>
+</form>
+
+</body>
+</html>
