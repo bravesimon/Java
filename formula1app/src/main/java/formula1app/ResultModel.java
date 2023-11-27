@@ -1,6 +1,7 @@
-package com.example.formula1app;
+package formula1app;
 
 import javax.persistence.*;
+import org.hibernate.annotations.Entity;
 
 @Entity
 @Table(name = "eredmeny")

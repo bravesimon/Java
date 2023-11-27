@@ -1,5 +1,6 @@
-package com.example.formula1app;
+package formula1app;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -23,24 +24,27 @@ public class MainController {
     @FXML private TextField tfName, tfMessage, tfSentTime;
     @FXML private TableView tv1;
 
-    @FXML private TableColumn<FormModel, String> IDCol;
-    @FXML private TableColumn<FormModel, String> nameCol;
-    @FXML private TableColumn<FormModel, String> messageCol;
-    @FXML private TableColumn<FormModel, String> sentCol;
-
+    @FXML private TableColumn<FormModel, String> IDCol = new TableColumn("Id");;
+    @FXML private TableColumn<FormModel, String> nameCol= new TableColumn("Név");
+    @FXML private TableColumn<FormModel, String> messageCol = new TableColumn("Uzenet");
+    @FXML private TableColumn<FormModel, String> sentCol = new TableColumn("Kuldes ideje");
 
     @FXML void initialize(){
+        IDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        messageCol.setCellValueFactory(new PropertyValueFactory<>("message"));
+        sentCol.setCellValueFactory(new PropertyValueFactory<>("sent"));
+
         //ElemekTörlése();
         Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
 
         try {
+            cfg.addAnnotatedClass(formula1app.FormModel.class);
             factory = cfg.buildSessionFactory();
-
             lb1.setText("Adatbázis hasznalatra kesz.");
         }catch (Exception e) {
             System.out.println("e: " + e.getMessage());
             lb1.setText("Adatbázis inicializalasa sikertelen.");
-
         }
     }
 
@@ -52,14 +56,7 @@ public class MainController {
     void Create(){
         Session session = factory.openSession();
         Transaction t = session.beginTransaction();
-        FormModel form =new FormModel();
-
-//        FormModel form =new FormModel(14, tfName.getText(), tfMessage.getText(), tfSentTime.getText());
-     /*   FormModel form =new FormModel();
-    form.setName(tfName.getText());
-    form.setMessage( tfMessage.getText());
-    form.setSent(tfSentTime.getText());*/
-
+        FormModel form = new FormModel(tfName.getText(), tfMessage.getText(), tfSentTime.getText());
         session.save(form);
         t.commit();
     }
@@ -72,27 +69,24 @@ public class MainController {
     }
 
     @FXML protected void menuReadClick() {
-       // ElemekTörlése();
+        // ElemekTörlése();
         tv1.setVisible(true);
         tv1.setManaged(true);
+
         tv1.getColumns().removeAll(tv1.getColumns());
-
-        IDCol = new TableColumn("Id");
-        nameCol = new TableColumn("Név");
-        messageCol = new TableColumn("Uzenet");
-        sentCol = new TableColumn("Kuldes ideje");
-
         tv1.getColumns().addAll(IDCol, nameCol, messageCol, sentCol);
 
-        IDCol.setCellValueFactory(new PropertyValueFactory<>("Id"));
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("Név"));
-        messageCol.setCellValueFactory(new PropertyValueFactory<>("Uzenet"));
-        sentCol.setCellValueFactory(new PropertyValueFactory<>("Kuldes ideje"));
         tv1.getItems().clear();
 
         Session session = factory.openSession();
         Transaction t = session.beginTransaction();
-        List<FormModel> list = session.createQuery("FROM com.example.formula1app.FormModel").list();
+
+        // FormModel fm = (FormModel) session.get(FormModel.class, 2);
+        List<FormModel> list2 = session.createQuery("from formula1app.FormModel").getResultList();
+        List<FormModel> list = session.createQuery("FROM formula1app.FormModel").list();
+
+        System.out.println("list: " + list.size());
+        System.out.println("list2: " + list2.size());
 
         for(FormModel form : list) {
             tv1.getItems().add(form);
@@ -110,5 +104,25 @@ public class MainController {
     @FXML protected void menuDeleteClick() {
         /* pl. az ID-t, amit törölni akarunk lenyíló listából (ComboBox) válasszuk ki.
 Minden esetben a művelet után kiírni, hogy sikeres volt-e, különben hibaüzenet */
+    }
+
+    public void menSoapDownload(ActionEvent actionEvent) {
+    }
+
+    public void menSoapDownload2(ActionEvent actionEvent) {
+    }
+
+    public void menSoapGrafikon(ActionEvent actionEvent) {
+    }
+
+    public void menuAdatbanyaszat(ActionEvent actionEvent) {
+    }
+
+    public void menuOthersStream(ActionEvent actionEvent) {
+    }
+
+    public void menuOthersParalell(ActionEvent actionEvent) {
+        //
+
     }
 }

@@ -1,4 +1,4 @@
-package com.example.formula1app;
+package formula1app;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -14,6 +14,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import soapcsomag.MNBArfolyamServiceSoap;
+
+import soapcsomag.MNBArfolyamServiceSoapGetDateIntervalStringFaultFaultMessage;
+import soapcsomag.MNBArfolyamServiceSoapImpl;
+
 
 public class Formula1 extends Application {
     @Override
@@ -22,12 +27,14 @@ public class Formula1 extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 640, 480);
         stage.setTitle("Formula1 adatbazis");
 
-        VBox főNode = new VBox();
+        VBox foNode = new VBox();
         Button bt1 = new Button("Gomb1");
-        főNode.getChildren().add(bt1);
+        foNode.getChildren().add(bt1);
 
         stage.setScene(scene);
         stage.show();
+
+        // Create();
 
         bt1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -45,7 +52,7 @@ public class Formula1 extends Application {
         Transaction t = session.beginTransaction();
 
         //FormModel form =new FormModel(12, "Horváth Éva","minden rendben", "2023.11.25 12:04");
-        FormModel form =new FormModel();
+        FormModel form = new FormModel();
 
 /*        FormModel form =new FormModel();
         form.setName("Horváth Éva");
@@ -57,6 +64,19 @@ public class Formula1 extends Application {
     }
 
     public static void main(String[] args) {
+
         launch();
+
+        MNBArfolyamServiceSoapImpl impl = new MNBArfolyamServiceSoapImpl();
+        MNBArfolyamServiceSoap service =
+                impl.getCustomBindingMNBArfolyamServiceSoap();
+        try {
+            System.out.println(service.getInfo());
+            System.out.println(service.getCurrentExchangeRates());
+            System.out.println(service.getExchangeRates("2022-08-14","2022-09-14","EUR"));
+        } catch (Exception e) {
+            System.err.print(e);
+        }
+
     }
 }

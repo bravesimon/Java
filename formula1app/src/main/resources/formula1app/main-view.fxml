@@ -12,7 +12,7 @@
 <?import javafx.scene.control.TableView?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.formula1app.MainController">
+      fx:controller="formula1app.MainController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
@@ -31,6 +31,45 @@
                 </items>
                 <items>
                     <MenuItem text="Töröl" onAction="#menuDeleteClick"/>
+                </items>
+            </Menu>
+
+            <Menu text="Rest1">
+            </Menu>
+
+
+            <Menu text="SoapKliens">
+                <items>
+                    <MenuItem text="Letöltés" onAction="#menSoapDownload"/>
+                </items>
+                <items>
+                    <MenuItem text="Letöltés2" onAction="#menSoapDownload2"/>
+                </items>
+                <items>
+                    <MenuItem text="Grafikon " onAction="#menSoapGrafikon"/>
+                </items>
+            </Menu>
+
+
+            <Menu text="Adatbányászat">
+                <items>
+                    <MenuItem text="Döntési fa" onAction="#menuAdatbanyaszat"/>
+                </items>
+                <items>
+                    <MenuItem text="Több algoritmus" onAction="#menuAdatbanyaszat"/>
+                </items>
+                <items>
+                    <MenuItem text="Több algoritmus2" onAction="#menuAdatbanyaszat"/>
+                </items>
+            </Menu>
+
+
+            <Menu text="Egyéb ">
+                <items>
+                    <MenuItem text="Párhuzamos" onAction="#menuOthersParalell"/>
+                </items>
+                <items>
+                    <MenuItem text="Stream" onAction="#menuOthersStream"/>
                 </items>
             </Menu>
         </menus>

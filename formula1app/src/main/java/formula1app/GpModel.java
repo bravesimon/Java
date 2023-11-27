@@ -1,19 +1,20 @@
-package com.example.formula1app;
+package formula1app;
 
 import javax.persistence.*;
+import org.hibernate.annotations.Entity;
 
 @Entity
 @Table(name = "gp")
 public class GpModel {
     @Column(name = "datum")
-    private String Date;
+    public String Date;
 
     @Id
     @Column(name = "nev")
-    private String Name;
+    public String Name;
 
     @Column(name = "helyszin")
-    private String Place;
+    public String Place;
 
     public GpModel() {
     }

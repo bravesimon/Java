@@ -5,7 +5,7 @@ module com.example.formula1app {
     requires java.naming;
     requires java.sql;
     requires org.hibernate.orm.core;
-
-    opens com.example.formula1app to javafx.fxml;
-    exports com.example.formula1app;
+    
+    exports formula1app;
+    opens formula1app to javafx.fxml;
 }

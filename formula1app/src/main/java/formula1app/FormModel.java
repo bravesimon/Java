@@ -1,6 +1,7 @@
-package com.example.formula1app;
+package formula1app;
 
 import javax.persistence.*;
+import org.hibernate.annotations.Entity;
 
 @Entity
 @Table(name = "form")
@@ -10,43 +11,22 @@ public class FormModel {
     @Column(name="id")
     public int id;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public FormModel() {
-    }
-    public FormModel(int id) {
-        this.id = id;
-    }
-    @Override
-    public String toString() {
-        return "FormModel{" +
-                "id=" + id +
-                '}';
-    }
-
-  /*  @Column(name="name")
-    private String name;
+    @Column(name="name")
+    public String name;
 
     @Column(name="message")
-    private String message;
+    public String message;
 
     @Column(name="sent")
-    private String sent;
+    public String sent;
 
-    public FormModel() {
-    }
-
-    public FormModel(int id, String name, String message, String sent) {
-       this.id = id;
+    public FormModel(String name, String message, String sent) {
         this.name = name;
         this.message = message;
         this.sent = sent;
+    }
+
+    public FormModel() {
     }
 
     public int getId() {
@@ -79,5 +59,5 @@ public class FormModel {
 
     public void setSent(String sent) {
         this.sent = sent;
-    }*/
+    }
 }
