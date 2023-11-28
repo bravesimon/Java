@@ -20,7 +20,25 @@ public class GpModelController implements IEntityController{
         placeCol.setCellValueFactory(new PropertyValueFactory<>("helyszin"));
     }
 
-    public TableColumn[] GetAll() {
+    public String[] GetColumnNames() {
+        return new String[] {"Datum", "Név", "Helyszin"};
+    }
+
+    public String GetPropertyName(String columnName) {
+        if (columnName.equals("Id")) {
+            return "id";
+        } else if (columnName.equals("Név")) {
+            return "name";
+        } else if (columnName.equals("Uzenet")) {
+            return "message";
+        } else if (columnName.equals("Kuldes ideje")) {
+            return "sent";
+        }
+
+        return "";
+    }
+
+    public TableColumn[] GetAllTables() {
         return new TableColumn[]{dateCol, nameCol, placeCol};
     }
 
@@ -29,5 +47,14 @@ public class GpModelController implements IEntityController{
     }
     public String GetReadQuery() {
         return "FROM formula1app.models.GpModel";
+    }
+
+    public String GetDeleteQuery() {
+        return "delete formula1app.models.GpModel where id = :convertedId";
+    }
+
+
+    public String GetRead2Query(String column, String searched) {
+        return "SELECT " + column + " FROM formula1app.models.GpModel where " + column + " = :searched";
     }
 }

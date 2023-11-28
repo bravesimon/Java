@@ -11,11 +11,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
+import org.hibernate.sql.Update;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 public class MainController {
     enum eCRUDstate {
@@ -28,17 +28,27 @@ public class MainController {
 
     @FXML private Label lbVisszajelzes, lbName, lbUzenet;
     @FXML private GridPane gp;
-    @FXML private GridPane gpRead2;
     @FXML private TextField tfName, tfMessage;
     @FXML private TableView tV;
     @FXML private ComboBox cbUpdate;
     @FXML private Button btKuldes;
 
+    @FXML private GridPane gpRead2;
+    @FXML private TextField tfRead2;
+    @FXML private CheckBox chbRead2a;
+    @FXML private RadioButton radio1Read2;
+    @FXML private RadioButton radio2Read2;
+    @FXML private RadioButton radio3Read2;
+    @FXML private RadioButton radio4Read2;
+
+    @FXML private List<RadioButton> radioButtons;
+    @FXML private ComboBox cbRead2;
+
     private IEntityController modelController;
 
     private void SetVisiblity(eCRUDstate state) {
-        gp.setVisible( state != eCRUDstate.initOrNotUsed);
-        tV.setVisible(state == eCRUDstate.read);
+        gp.setVisible(state != eCRUDstate.initOrNotUsed);
+        tV.setVisible(state == eCRUDstate.read || state == eCRUDstate.read2);
 
         boolean btBool = (state == eCRUDstate.delete || state == eCRUDstate.update || state == eCRUDstate.write);
         btKuldes.setVisible(btBool);
@@ -50,12 +60,35 @@ public class MainController {
         boolean cbBool = (state == eCRUDstate.delete || state == eCRUDstate.update);
         cbUpdate.setVisible(cbBool);
 
+        gpRead2.setVisible(state == eCRUDstate.read2);
+        tfRead2.setVisible(state == eCRUDstate.read2);
+        chbRead2a.setVisible(state == eCRUDstate.read2);
+
+        for (RadioButton radioButton : Arrays.asList(radio1Read2, radio2Read2, radio3Read2, radio4Read2)) {
+            radioButton.setVisible(state == eCRUDstate.read2);
+        }
+
+        cbRead2.setVisible(state == eCRUDstate.read2);
+
         currentState = state;
     }
 
     @FXML void initialize(){
         modelController = new FormModelController();
         SetVisiblity(eCRUDstate.initOrNotUsed);
+
+        ToggleGroup group = new ToggleGroup();
+        String[] strings = modelController.GetColumnNames();
+        int index = 0;
+
+        radioButtons = Arrays.asList(radio1Read2, radio2Read2, radio3Read2, radio4Read2);
+
+        for (RadioButton radioButton : radioButtons) {
+            radioButton.setToggleGroup(group);
+            radioButton.setText(strings[index++]);
+        }
+
+        cbRead2.getItems().addAll("Normal rendezes", "Forditott rendezes");
 
         try {
             Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
@@ -72,21 +105,29 @@ public class MainController {
         SetVisiblity(eCRUDstate.write);
     }
 
-    @FXML protected void menuReadClick() {
-        SetVisiblity(eCRUDstate.read);
-
+    private void UpdateTableView(String query, Boolean reverse) {
         tV.getColumns().removeAll(tV.getColumns());
-        tV.getColumns().addAll(modelController.GetAll());
+        tV.getColumns().addAll(modelController.GetAllTables());
 
         try {
             Session session = factory.openSession();
             Transaction t = session.beginTransaction();
-            List<FormModel> list = session.createQuery(modelController.GetReadQuery()).list();
+            List<FormModel> list = session.createQuery(query).list();
+
+            if (reverse) {
+                Collections.reverse(list);
+            }
+
             tV.getItems().setAll(list);
             t.commit();
+            lbVisszajelzes.setText("Adatok kiolvasva.");
         } catch (Exception e) {
-            lbVisszajelzes.setText(e.getMessage());
+            lbVisszajelzes.setText("Hiba az adatok kiolvasasa kozben.");
         }
+    }
+    @FXML protected void menuReadClick() {
+        SetVisiblity(eCRUDstate.read);
+        UpdateTableView(modelController.GetReadQuery(), false);
     }
 
     private void handleDeleteUpdateCombobox() {
@@ -121,8 +162,8 @@ public class MainController {
             Transaction t = session.beginTransaction();
 
             int convertedId = (int) selectedId;
-            Query q = session.createQuery("delete FormModel where id = :convertedId")
-                    .setParameter("convertedId", convertedId);
+            Query q = session.createQuery(modelController.GetDeleteQuery())
+                                .setParameter("convertedId", convertedId);
             q.executeUpdate();
 
             t.commit();
@@ -164,7 +205,33 @@ public class MainController {
         }
     }
 
-    public void menuFilterReadClick(ActionEvent actionEvent) {
+    @FXML protected void menuFilterReadClick(ActionEvent actionEvent) {
+        SetVisiblity(eCRUDstate.read2);
+        lbUzenet.setText("Keressen az adatbazisban a kovetkezo filterekkel:");
+    }
+
+    @FXML protected void btRead2Kereses() {
+        String searched = tfRead2.getText();
+
+        if (searched.isEmpty() || searched.equals("Keresett szoveg")) {
+            lbVisszajelzes.setText("Probalja meg valid keresessel.");
+            return;
+        }
+
+        if (chbRead2a.isSelected()) {
+            searched = searched.toLowerCase();
+        }
+
+        String column = "";
+        for (RadioButton radioButton : radioButtons) {
+            if ( radioButton.isSelected() ) {
+                column = radioButton.getText();
+            }
+        }
+
+        String propertName = modelController.GetPropertyName(column);
+        Boolean reverseNeeded = (cbRead2.getValue() != null && !cbRead2.getValue().equals("Normal rendezes"));
+        UpdateTableView(modelController.GetRead2Query(propertName, searched), reverseNeeded);
     }
 
     public void handleCbSelection(ActionEvent actionEvent) {
