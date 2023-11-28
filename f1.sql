@@ -31,6 +31,9 @@ CREATE TABLE `eredmeny` (
   `tipus` varchar(150) NOT NULL,
   `motor` varchar(150) NOT NULL
 );
+
+-- SQLITE syntax
+-- CREATE TABLE failed_banks_id (id integer primary key autoincrement, name text, city text, state text, zip integer, acquired_by text, close_date date, updated_date date);
 --ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -58,6 +61,7 @@ CREATE TABLE `form` (
   `sent` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 );
+
 -- ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

@@ -11,8 +11,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TableView?>
 
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.RadioButton?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="formula1app.MainController">
+      fx:controller="formula1app.controllers.MainController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
@@ -23,6 +26,11 @@
                 <items>
                     <MenuItem text="Olvas" onAction="#menuReadClick"/>
                 </items>
+
+                <items>
+                    <MenuItem text="Olvas2" onAction="#menuFilterReadClick"/>
+                </items>
+
                 <items>
                     <MenuItem text="Ír" onAction="#menuCreateClick"/>
                 </items>
@@ -37,7 +45,6 @@
             <Menu text="Rest1">
             </Menu>
 
-
             <Menu text="SoapKliens">
                 <items>
                     <MenuItem text="Letöltés" onAction="#menSoapDownload"/>
@@ -49,7 +56,6 @@
                     <MenuItem text="Grafikon " onAction="#menSoapGrafikon"/>
                 </items>
             </Menu>
-
 
             <Menu text="Adatbányászat">
                 <items>
@@ -63,7 +69,6 @@
                 </items>
             </Menu>
 
-
             <Menu text="Egyéb ">
                 <items>
                     <MenuItem text="Párhuzamos" onAction="#menuOthersParalell"/>
@@ -75,22 +80,29 @@
         </menus>
     </MenuBar>
 
-    <Label fx:id="lb1">Üzenet</Label>
-
-    <GridPane fx:id="gp1" hgap="2" vgap="4">
-        <Label GridPane.rowIndex="0" GridPane.columnIndex="0">Nev:</Label>
+    <GridPane fx:id="gp" hgap="6" vgap="6">
+        <Label fx:id="lbName" GridPane.rowIndex="0" GridPane.columnIndex="0">Nev:</Label>
         <TextField fx:id="tfName" GridPane.rowIndex="0"  GridPane.columnIndex="1"></TextField>
 
-        <Label GridPane.rowIndex="1" GridPane.columnIndex="0">Uzenet:</Label>
+        <Label fx:id="lbUzenet" GridPane.rowIndex="1" GridPane.columnIndex="0">Uzenet:</Label>
         <TextField fx:id="tfMessage" GridPane.rowIndex="1"  GridPane.columnIndex="1"></TextField>
 
-        <Label GridPane.rowIndex="2" GridPane.columnIndex="0">Kuldes ideje:</Label>
-        <TextField fx:id="tfSentTime" GridPane.rowIndex="2"  GridPane.columnIndex="1"></TextField>
+        <Label fx:id="lbVisszajelzes" GridPane.rowIndex="0" GridPane.columnIndex="3">Visszajelzes</Label>
 
-        <Button onAction="#bt1Click" GridPane.rowIndex="3" GridPane.columnIndex="1" >Küldés</Button>
+        <ComboBox fx:id="cbUpdate" GridPane.rowIndex="1" GridPane.columnIndex="3" onAction="#handleCbSelection"/>
+
+        <Button fx:id="btKuldes" onAction="#btKuldes" GridPane.rowIndex="2" GridPane.columnIndex="3" >Küldés</Button>
+
+        <GridPane fx:id="gpRead2" hgap="6" vgap="6" GridPane.rowIndex="0" GridPane.columnIndex="4">
+            <TextField fx:id="tfRead2" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+            <CheckBox fx:id="chbRead2a" mnemonicParsing="false" text="CheckBox" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+            <RadioButton mnemonicParsing="false" text="RadioButton" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="cbRead2" prefWidth="150.0" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+        </GridPane>
+
     </GridPane>
 
-    <TableView fx:id="tv1" >
+    <TableView fx:id="tV" >
     </TableView>
 
 </VBox>

@@ -1,7 +1,7 @@
-package formula1app;
+package formula1app.models;
 
 import javax.persistence.*;
-import org.hibernate.annotations.Entity;
+
 @Entity
 @Table(name = "pilota")
 public class PilotModel {
@@ -25,7 +25,6 @@ public class PilotModel {
     }
 
     public PilotModel(String name, String sex, String birthDate, String nation) {
-     //   Identifier = identifier;
         Name = name;
         Sex = sex;
         BirthDate = birthDate;

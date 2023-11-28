@@ -1,7 +1,6 @@
-package formula1app;
+package formula1app.models;
 
 import javax.persistence.*;
-import org.hibernate.annotations.Entity;
 
 @Entity
 @Table(name = "form")
@@ -9,55 +8,55 @@ public class FormModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    public int id;
+    public int Id;
 
     @Column(name="name")
-    public String name;
+    public String Name;
 
     @Column(name="message")
-    public String message;
+    public String Message;
 
     @Column(name="sent")
-    public String sent;
+    public String Sent;
 
     public FormModel(String name, String message, String sent) {
-        this.name = name;
-        this.message = message;
-        this.sent = sent;
+        Name = name;
+        Message = message;
+        Sent = sent;
     }
 
     public FormModel() {
     }
 
     public int getId() {
-        return id;
+        return Id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        Id = id;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        Name = name;
     }
 
     public String getMessage() {
-        return message;
+        return Message;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        Message = message;
     }
 
     public String getSent() {
-        return sent;
+        return Sent;
     }
 
     public void setSent(String sent) {
-        this.sent = sent;
+        Sent = sent;
     }
 }

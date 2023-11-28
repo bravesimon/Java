@@ -1,32 +1,31 @@
-package formula1app;
+package formula1app.models;
 
 import javax.persistence.*;
-import org.hibernate.annotations.Entity;
 
 @Entity
 @Table(name = "eredmeny")
 public class ResultModel {
     @Column(name="datum")
-    private String Date;
+    public String Date;
 
     @Id
     @Column(name="pilotaaz")
-    private int PilotId;
+    public int PilotId;
 
     @Column(name="helyezes")
-    private String Place;
+    public String Place;
 
     @Column(name="hiba")
-    private String Mistake;
+    public String Mistake;
 
     @Column(name="csapat")
-    private String Team;
+    public String Team;
 
     @Column(name="tipus")
-    private String Type;
+    public String Type;
 
     @Column(name="motor")
-    private String Motor;
+    public String Motor;
 
     public ResultModel() {
     }

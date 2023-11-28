@@ -1,13 +1,12 @@
-package formula1app;
+package formula1app.models;
 
 import javax.persistence.*;
-import org.hibernate.annotations.Entity;
 
 @Entity
 @Table(name = "gp")
 public class GpModel {
     @Column(name = "datum")
-    public String Date;
+    public int Date;
 
     @Id
     @Column(name = "nev")
@@ -19,17 +18,17 @@ public class GpModel {
     public GpModel() {
     }
 
-    public GpModel(String date, String name, String place) {
-        Date = date;
-        Name = name;
-        Place = place;
+    public GpModel(int date, String name, String place) {
+        this.Date = date;
+        this.Name = name;
+        this.Place = place;
     }
 
-    public String getDate() {
+    public int getDate() {
         return Date;
     }
 
-    public void setDate(String date) {
+    public void setDate(int date) {
         Date = date;
     }
 
