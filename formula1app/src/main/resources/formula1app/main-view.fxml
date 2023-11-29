@@ -81,12 +81,20 @@
         </menus>
     </MenuBar>
 
+    <GridPane fx:id="gpOthers" hgap="6" vgap="6">
+        <Label fx:id="label1" text="Label 1" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Label fx:id="label2" text="Label 2" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Button fx:id="btnStart" text="Start" GridPane.rowIndex="0" GridPane.columnIndex="2" onAction="#startThread"/>
+        <Button fx:id="btnStop" text="Stop" GridPane.rowIndex="0" GridPane.columnIndex="3" onAction="#stopThread"/>
+    </GridPane>
+
+
     <GridPane fx:id="gp" hgap="6" vgap="6">
         <Label fx:id="lbName" GridPane.rowIndex="0" GridPane.columnIndex="0">Nev:</Label>
-        <TextField fx:id="tfName" GridPane.rowIndex="0"  GridPane.columnIndex="1"></TextField>
+        <TextField fx:id="tfName" GridPane.rowIndex="0" GridPane.columnIndex="1"></TextField>
 
         <Label fx:id="lbUzenet" GridPane.rowIndex="1" GridPane.columnIndex="0">Uzenet:</Label>
-        <TextField fx:id="tfMessage" GridPane.rowIndex="1"  GridPane.columnIndex="1"></TextField>
+        <TextField fx:id="tfMessage" GridPane.rowIndex="1" GridPane.columnIndex="1"></TextField>
 
         <Label fx:id="lbVisszajelzes" GridPane.rowIndex="0" GridPane.columnIndex="3">Visszajelzes</Label>
 

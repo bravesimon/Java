@@ -1,6 +1,7 @@
 package formula1app.controllers;
 
 import formula1app.models.FormModel;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,11 +12,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-import org.hibernate.sql.Update;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MainController {
     enum eCRUDstate {
@@ -25,6 +26,7 @@ public class MainController {
     private SessionFactory factory;
     private DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");
     private eCRUDstate currentState;
+    private List<Thread> threads;
 
     @FXML private Label lbVisszajelzes, lbName, lbUzenet;
     @FXML private GridPane gp;
@@ -40,13 +42,27 @@ public class MainController {
     @FXML private RadioButton radio2Read2;
     @FXML private RadioButton radio3Read2;
     @FXML private RadioButton radio4Read2;
-
     @FXML private List<RadioButton> radioButtons;
     @FXML private ComboBox cbRead2;
 
+    @FXML private GridPane gpOthers;
+    @FXML private Label label1;
+    @FXML private Label label2;
+    @FXML private Button btnStart;
+    @FXML private Button btnStop;
+
     private IEntityController modelController;
 
+    private void SetOthersMenu(Boolean isVisible) {
+        gpOthers.setVisible(isVisible);
+        label1.setVisible(isVisible);
+        label2.setVisible(isVisible);
+        btnStart.setVisible(isVisible);
+        btnStop.setVisible(isVisible);
+    }
+
     private void SetVisiblity(eCRUDstate state) {
+        SetOthersMenu(false);
         gp.setVisible(state != eCRUDstate.initOrNotUsed);
         tV.setVisible(state == eCRUDstate.read || state == eCRUDstate.read2);
 
@@ -112,7 +128,7 @@ public class MainController {
         try {
             Session session = factory.openSession();
             Transaction t = session.beginTransaction();
-            List<FormModel> list = session.createQuery(query).list();
+            List<FormModel> list = session.createQuery(query).stream().toList();
 
             if (reverse) {
                 Collections.reverse(list);
@@ -125,6 +141,7 @@ public class MainController {
             lbVisszajelzes.setText("Hiba az adatok kiolvasasa kozben.");
         }
     }
+
     @FXML protected void menuReadClick() {
         SetVisiblity(eCRUDstate.read);
         UpdateTableView(modelController.GetReadQuery(), false);
@@ -207,6 +224,7 @@ public class MainController {
 
     @FXML protected void menuFilterReadClick(ActionEvent actionEvent) {
         SetVisiblity(eCRUDstate.read2);
+        UpdateTableView(modelController.GetReadQuery(), false);
         lbUzenet.setText("Keressen az adatbazisban a kovetkezo filterekkel:");
     }
 
@@ -265,9 +283,59 @@ public class MainController {
     }
 
     public void menuOthersStream(ActionEvent actionEvent) {
+        SetVisiblity(eCRUDstate.read2);
+        lbUzenet.setText("Keressen az adatbazisban a kovetkezo filterekkel:");
+
+        SetOthersMenu(false);
+    }
+
+    private Thread makeThread(Label lbl, String txt, int sleep) {
+        Thread thread = new Thread(() -> {
+            AtomicInteger count = new AtomicInteger(0);
+            while (true) {
+                try {
+                    Thread.sleep(sleep);
+                } catch (InterruptedException e) {
+                }
+
+                Platform.runLater(() -> lbl.setText(txt + count.incrementAndGet()));
+            }
+        });
+
+        return thread;
     }
 
     public void menuOthersParalell(ActionEvent actionEvent) {
+        SetVisiblity(eCRUDstate.initOrNotUsed);
+        lbUzenet.setText("");
+        SetOthersMenu(true);
     }
 
+    public void startThread() {
+        stopThread();
+
+        threads = new ArrayList<>();
+        threads.add(makeThread(label1,"thread1: ", 1000));
+        threads.add(makeThread(label2,"thread2: ", 2000));
+
+        for (Thread th : threads) {
+            th.setDaemon(true);
+            th.start();
+        }
+    }
+
+    public void stopThread() {
+        if (threads == null) {
+            return;
+        }
+
+        for (Thread th : threads) {
+            th.stop();
+
+            try {
+                th.join();
+            } catch (InterruptedException e) {
+            }
+        }
+    }
 }
