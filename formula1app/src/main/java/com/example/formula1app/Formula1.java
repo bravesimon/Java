@@ -1,4 +1,4 @@
-package formula1app;
+package com.example.formula1app;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

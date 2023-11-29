@@ -1,4 +1,4 @@
-package formula1app.controllers;
+package com.example.formula1app.controllers;
 
 import javafx.scene.control.TableColumn;
 

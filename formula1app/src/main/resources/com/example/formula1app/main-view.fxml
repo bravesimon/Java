@@ -14,9 +14,9 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ToggleButton?>
+
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="formula1app.controllers.MainController">
+      fx:controller="com.example.formula1app.controllers.MainController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
@@ -60,13 +60,13 @@
 
             <Menu text="Adatbányászat">
                 <items>
-                    <MenuItem text="Döntési fa" onAction="#menuAdatbanyaszat"/>
+                    <MenuItem text="Döntési fa" onAction="#menuDecisionTree"/>
                 </items>
                 <items>
-                    <MenuItem text="Több algoritmus" onAction="#menuAdatbanyaszat"/>
+                    <MenuItem text="Több algoritmus" onAction="#menuAlgorithms"/>
                 </items>
                 <items>
-                    <MenuItem text="Több algoritmus2" onAction="#menuAdatbanyaszat"/>
+                    <MenuItem text="Több algoritmus2" onAction="#menuMoreAlgorithm"/>
                 </items>
             </Menu>
 
@@ -86,6 +86,8 @@
         <Label fx:id="label2" text="Label 2" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
         <Button fx:id="btnStart" text="Start" GridPane.rowIndex="0" GridPane.columnIndex="2" onAction="#startThread"/>
         <Button fx:id="btnStop" text="Stop" GridPane.rowIndex="0" GridPane.columnIndex="3" onAction="#stopThread"/>
+
+        <ComboBox fx:id="cmbAlgorithms" GridPane.rowIndex="0" GridPane.columnIndex="4" onAction="#handleSelectAlgorithm"/>
     </GridPane>
 
 

@@ -1,6 +1,6 @@
-package formula1app.controllers;
+package com.example.formula1app.controllers;
 
-import formula1app.models.FormModel;
+import com.example.formula1app.models.FormModel;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -51,6 +51,8 @@ public class MainController {
     @FXML private Button btnStart;
     @FXML private Button btnStop;
 
+    @FXML private ComboBox cmbAlgorithms;
+
     private IEntityController modelController;
 
     private void SetOthersMenu(Boolean isVisible) {
@@ -62,7 +64,10 @@ public class MainController {
     }
 
     private void SetVisiblity(eCRUDstate state) {
+        currentState = state;
+
         SetOthersMenu(false);
+
         gp.setVisible(state != eCRUDstate.initOrNotUsed);
         tV.setVisible(state == eCRUDstate.read || state == eCRUDstate.read2);
 
@@ -86,10 +91,14 @@ public class MainController {
 
         cbRead2.setVisible(state == eCRUDstate.read2);
 
-        currentState = state;
+        cmbAlgorithms.setVisible(false);
     }
 
-    @FXML void initialize(){
+    public MainController() {
+
+    }
+
+    @FXML public void initialize(){
         modelController = new FormModelController();
         SetVisiblity(eCRUDstate.initOrNotUsed);
 
@@ -128,13 +137,14 @@ public class MainController {
         try {
             Session session = factory.openSession();
             Transaction t = session.beginTransaction();
-            List<FormModel> list = session.createQuery(query).stream().toList();
+            List<FormModel> list = session.createQuery(query).list();
+                    // .stream().toList();
 
             if (reverse) {
                 Collections.reverse(list);
             }
 
-            tV.getItems().setAll(list);
+            boolean b = tV.getItems().setAll(list);
             t.commit();
             lbVisszajelzes.setText("Adatok kiolvasva.");
         } catch (Exception e) {
@@ -279,7 +289,23 @@ public class MainController {
     public void menSoapGrafikon(ActionEvent actionEvent) {
     }
 
-    public void menuAdatbanyaszat(ActionEvent actionEvent) {
+    private void MakeAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    public void menuDecisionTree(ActionEvent actionEvent) {
+    }
+    public void menuAlgorithms() {
+
+    }
+
+    public void menuMoreAlgorithm() {
+        cmbAlgorithms.setVisible(true);
+
     }
 
     public void menuOthersStream(ActionEvent actionEvent) {
@@ -336,6 +362,15 @@ public class MainController {
                 th.join();
             } catch (InterruptedException e) {
             }
+        }
+    }
+
+
+    public void handleSelectAlgorithm() {
+        Integer selectedId = (Integer) cbUpdate.getValue();
+
+        if (selectedId == null) {
+            return;
         }
     }
 }

@@ -1,4 +1,4 @@
-package formula1app.models;
+package com.example.formula1app.models;
 
 import javax.persistence.*;
 

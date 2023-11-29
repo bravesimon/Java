@@ -1,6 +1,6 @@
-package formula1app.controllers;
+package com.example.formula1app.controllers;
 
-import formula1app.models.GpModel;
+import com.example.formula1app.models.GpModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -43,18 +43,18 @@ public class GpModelController implements IEntityController{
     }
 
     public String GetIdQuery() {
-        return "SELECT id FROM formula1app.models.GpModel";
+        return "SELECT id FROM com.example.formula1app.models.GpModel";
     }
     public String GetReadQuery() {
-        return "FROM formula1app.models.GpModel";
+        return "FROM com.example.formula1app.models.GpModel";
     }
 
     public String GetDeleteQuery() {
-        return "delete formula1app.models.GpModel where id = :convertedId";
+        return "delete com.example.formula1app.models.GpModel where id = :convertedId";
     }
 
 
     public String GetRead2Query(String column, String searched) {
-        return "SELECT " + column + " FROM formula1app.models.GpModel where " + column + " = :searched";
+        return "SELECT " + column + " FROM com.example.formula1app.models.GpModel where " + column + " = :searched";
     }
 }

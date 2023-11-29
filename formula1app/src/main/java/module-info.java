@@ -6,12 +6,12 @@ module com.example.formula1app {
     requires java.sql;
     requires org.hibernate.orm.core;
 
-    opens formula1app.models;
-    exports formula1app.models;
+    opens com.example.formula1app.models;
+    exports com.example.formula1app.models;
 
-    exports formula1app.controllers;
-    opens formula1app.controllers to javafx.fxml;
+    exports com.example.formula1app.controllers;
+    opens com.example.formula1app.controllers to javafx.fxml;
 
-    exports formula1app;
-    opens formula1app to javafx.fxml;
+    exports com.example.formula1app;
+    opens com.example.formula1app to javafx.fxml;
 }

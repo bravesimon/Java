@@ -11,7 +11,7 @@
            <property name="connection.username">root</property>
            <property name="connection.password">123456</property>
 
-           <mapping class="formula1app.models.FormModel"/>-->
+           <mapping class="com.example.formula1app.models.FormModel"/>-->
 
 
            <!-- sql-lite:-->
@@ -22,10 +22,10 @@
         <property name="connection.username">root</property>
         <property name="connection.password">123456</property>
 
-        <mapping class="formula1app.models.FormModel"/>
-        <mapping class="formula1app.models.GpModel"/>
-        <mapping class="formula1app.models.PilotModel"/>
-        <mapping class="formula1app.models.ResultModel"/>
+        <mapping class="com.example.formula1app.models.FormModel"/>
+        <mapping class="com.example.formula1app.models.GpModel"/>
+        <mapping class="com.example.formula1app.models.PilotModel"/>
+        <mapping class="com.example.formula1app.models.ResultModel"/>
 
     </session-factory>
 </hibernate-configuration>

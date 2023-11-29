@@ -1,6 +1,6 @@
-package formula1app.controllers;
+package com.example.formula1app.controllers;
 
-import formula1app.models.FormModel;
+import com.example.formula1app.models.FormModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -47,19 +47,19 @@ public class FormModelController implements IEntityController {
 
 
     public String GetReadQuery () {
-        return "FROM formula1app.models.FormModel";
+        return "FROM com.example.formula1app.models.FormModel";
     }
 
     public String GetIdQuery() {
-        return "SELECT id FROM formula1app.models.FormModel";
+        return "SELECT id FROM com.example.formula1app.models.FormModel";
     }
 
     public String GetDeleteQuery() {
-        return "delete formula1app.models.FormModel where id = :convertedId";
+        return "delete com.example.formula1app.models.FormModel where id = :convertedId";
     }
 
     public String GetRead2Query(String column, String searched) {
-        return "FROM formula1app.models.FormModel where " + column + " = " + searched;
+        return "FROM com.example.formula1app.models.FormModel where " + column + " = " + searched;
     }
 
     public TableColumn<FormModel, String> getIDCol() {
