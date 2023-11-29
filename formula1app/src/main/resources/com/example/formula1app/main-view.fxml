@@ -70,7 +70,7 @@
                 </items>
             </Menu>
 
-            <Menu text="Egyéb ">
+            <Menu text="Egyéb">
                 <items>
                     <MenuItem text="Párhuzamos" onAction="#menuOthersParalell"/>
                 </items>
@@ -92,20 +92,20 @@
 
 
     <GridPane fx:id="gp" hgap="6" vgap="6">
-        <Label fx:id="lbName" GridPane.rowIndex="0" GridPane.columnIndex="0">Nev:</Label>
+        <Label fx:id="lbName" GridPane.rowIndex="0" GridPane.columnIndex="0">Név:</Label>
         <TextField fx:id="tfName" GridPane.rowIndex="0" GridPane.columnIndex="1"></TextField>
 
-        <Label fx:id="lbUzenet" GridPane.rowIndex="1" GridPane.columnIndex="0">Uzenet:</Label>
+        <Label fx:id="lbUzenet" GridPane.rowIndex="1" GridPane.columnIndex="0">Üzenet:</Label>
         <TextField fx:id="tfMessage" GridPane.rowIndex="1" GridPane.columnIndex="1"></TextField>
 
-        <Label fx:id="lbVisszajelzes" GridPane.rowIndex="0" GridPane.columnIndex="3">Visszajelzes</Label>
+        <Label fx:id="lbVisszajelzes" GridPane.rowIndex="0" GridPane.columnIndex="3">Visszajelzés</Label>
 
         <ComboBox fx:id="cbUpdate" GridPane.rowIndex="1" GridPane.columnIndex="3" onAction="#handleCbSelection"/>
 
         <Button fx:id="btKuldes" onAction="#btKuldes" GridPane.rowIndex="2" GridPane.columnIndex="3" >Küldés</Button>
 
         <GridPane fx:id="gpRead2" hgap="6" vgap="6" GridPane.rowIndex="0" GridPane.columnIndex="0">
-            <TextField fx:id="tfRead2" text="Keresett szoveg" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+            <TextField fx:id="tfRead2" text="Keresett szöveg" GridPane.rowIndex="0" GridPane.columnIndex="0" />
             <CheckBox fx:id="chbRead2a" mnemonicParsing="false" text="Pontos egyezes" GridPane.rowIndex="0" GridPane.columnIndex="1" />
 
             <RadioButton fx:id="radio1Read2" mnemonicParsing="false" text="RadioButton1" GridPane.rowIndex="1" GridPane.columnIndex="0" />
@@ -114,7 +114,7 @@
             <RadioButton fx:id="radio4Read2" mnemonicParsing="false" text="RadioButton4" GridPane.rowIndex="4" GridPane.columnIndex="0" />
 
             <ComboBox fx:id="cbRead2" prefWidth="150.0" GridPane.rowIndex="1" GridPane.columnIndex="1" />
-            <Button fx:id="btRead2Kereses" onAction="#btRead2Kereses" GridPane.rowIndex="1" GridPane.columnIndex="2" >Kereses</Button>
+            <Button fx:id="btRead2Kereses" onAction="#btRead2Kereses" GridPane.rowIndex="1" GridPane.columnIndex="2" >Keresés</Button>
         </GridPane>
 
     </GridPane>

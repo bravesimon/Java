@@ -113,21 +113,22 @@ public class MainController {
             radioButton.setText(strings[index++]);
         }
 
-        cbRead2.getItems().addAll("Normal rendezes", "Forditott rendezes");
+        cbRead2.getItems().addAll("Normál rendezés", "Fordított rendezés");
 
         try {
             Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
             cfg.addAnnotatedClass(FormModel.class);
             factory = cfg.buildSessionFactory();
-            lbVisszajelzes.setText("Adatbázis hasznalatra kesz.");
+            lbVisszajelzes.setText("Adatbázis hasznalatra kész.");
         }catch (Exception e) {
             System.out.println("e: " + e.getMessage());
-            lbVisszajelzes.setText("Adatbázis inicializalasa sikertelen.");
+            lbVisszajelzes.setText("Adatbázis inicializálása sikertelen.");
         }
     }
 
     @FXML protected void menuCreateClick() {
         SetVisiblity(eCRUDstate.write);
+        lbVisszajelzes.setText("Adja meg a nevét és üzenetét.");
     }
 
     private void UpdateTableView(String query, Boolean reverse) {
@@ -144,11 +145,11 @@ public class MainController {
                 Collections.reverse(list);
             }
 
-            boolean b = tV.getItems().setAll(list);
+            tV.getItems().setAll(list);
             t.commit();
             lbVisszajelzes.setText("Adatok kiolvasva.");
         } catch (Exception e) {
-            lbVisszajelzes.setText("Hiba az adatok kiolvasasa kozben.");
+            lbVisszajelzes.setText("Hiba az adatok kiolvasasa közben.");
         }
     }
 
@@ -171,16 +172,18 @@ public class MainController {
 
     @FXML protected void menuUpdateClick() {
         SetVisiblity(eCRUDstate.update);
-        lbVisszajelzes.setText("Valaszon egy elemet.");
+        tfName.setText("");
+        tfMessage.setText("");
+        lbVisszajelzes.setText("Válasszon egy elemet.");
         handleDeleteUpdateCombobox();
-        lbVisszajelzes.setText("Modositsa a kivalasztott elemet a kuldes gombbal.");
+        lbVisszajelzes.setText("Módosítsa a kiválasztott elemet a küldés gombbal.");
     }
 
     @FXML protected void menuDeleteClick() {
         SetVisiblity(eCRUDstate.delete);
-        lbVisszajelzes.setText("Valaszon egy elemet.");
+        lbVisszajelzes.setText("Válasszon egy elemet.");
         handleDeleteUpdateCombobox();
-        lbVisszajelzes.setText("Torolje a kivalasztott elemet a kuldes gombbal.");
+        lbVisszajelzes.setText("Törölje a kiválasztott elemet a küldés gombbal.");
     }
 
     private void HandleDelete(Integer selectedId) {
@@ -194,11 +197,11 @@ public class MainController {
             q.executeUpdate();
 
             t.commit();
-            lbVisszajelzes.setText("Torolve az adatbázisbol.");
+            lbVisszajelzes.setText("Törölve az adatbázisból.");
             tfName.setText("");
             tfMessage.setText("");
         } catch (Exception e) {
-            lbVisszajelzes.setText("Hiba lepett fel.");
+            lbVisszajelzes.setText("Hiba lépett fel.");
         }
     }
 
@@ -226,23 +229,25 @@ public class MainController {
             }
 
             t.commit();
-            lbVisszajelzes.setText("Adatok beírva az adatbázisba");
+            tfName.setText("");
+            tfMessage.setText("");
+            lbVisszajelzes.setText("Adatok beírva az adatbázisba.");
         } catch (Exception e) {
-            lbVisszajelzes.setText("Hiba lepett fel.");
+            lbVisszajelzes.setText("Hiba lépett fel.");
         }
     }
 
     @FXML protected void menuFilterReadClick(ActionEvent actionEvent) {
         SetVisiblity(eCRUDstate.read2);
         UpdateTableView(modelController.GetReadQuery(), false);
-        lbUzenet.setText("Keressen az adatbazisban a kovetkezo filterekkel:");
+        lbVisszajelzes.setText("Keressen az adatbázisban a következő filterekkel:");
     }
 
     @FXML protected void btRead2Kereses() {
         String searched = tfRead2.getText();
 
-        if (searched.isEmpty() || searched.equals("Keresett szoveg")) {
-            lbVisszajelzes.setText("Probalja meg valid keresessel.");
+        if (searched.isEmpty() || searched.equals("Keresett szöveg")) {
+            lbVisszajelzes.setText("Próbálja meg valid kereséssel.");
             return;
         }
 
@@ -258,7 +263,7 @@ public class MainController {
         }
 
         String propertName = modelController.GetPropertyName(column);
-        Boolean reverseNeeded = (cbRead2.getValue() != null && !cbRead2.getValue().equals("Normal rendezes"));
+        Boolean reverseNeeded = (cbRead2.getValue() != null && !cbRead2.getValue().equals("Normál rendezés"));
         UpdateTableView(modelController.GetRead2Query(propertName, searched), reverseNeeded);
     }
 
@@ -276,7 +281,7 @@ public class MainController {
             tfName.setText(form.getName());
             tfMessage.setText(form.getMessage());
         } catch (Exception e) {
-            lbVisszajelzes.setText("Hiba lepett fel.");
+            lbVisszajelzes.setText("Hiba lépett fel.");
         }
     }
 
@@ -310,8 +315,7 @@ public class MainController {
 
     public void menuOthersStream(ActionEvent actionEvent) {
         SetVisiblity(eCRUDstate.read2);
-        lbUzenet.setText("Keressen az adatbazisban a kovetkezo filterekkel:");
-
+        lbVisszajelzes.setText("Keressen az adatázisban a következő filterekkel:");
         SetOthersMenu(false);
     }
 
@@ -333,7 +337,7 @@ public class MainController {
 
     public void menuOthersParalell(ActionEvent actionEvent) {
         SetVisiblity(eCRUDstate.initOrNotUsed);
-        lbUzenet.setText("");
+        lbVisszajelzes.setText("");
         SetOthersMenu(true);
     }
 

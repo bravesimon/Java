@@ -14,8 +14,8 @@ public class FormModelController implements IEntityController {
     FormModelController() {
         IDCol = new TableColumn<>("Id");
         NameCol = new TableColumn<>("Név");
-        MessageCol = new TableColumn<>("Uzenet");
-        SentCol = new TableColumn<>("Kuldes ideje");
+        MessageCol = new TableColumn<>("Üzenet");
+        SentCol = new TableColumn<>("Küldés ideje");
 
         IDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         NameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
